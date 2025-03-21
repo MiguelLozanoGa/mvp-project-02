@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-5">
     <h1 class="mb-4">Últimas Noticias</h1>
-
+    <!-- <pre>{{ news }}</pre> -->
     <ClientOnly>
       <div v-if="error">Error al cargar las noticias</div>
       <div v-else-if="pending">Cargando noticias...</div>
@@ -19,10 +19,10 @@
               :date="formatDate(article.publishedAt)"
             >
               <NuxtLink
+                class="btn btn-primary"
                 :to="`/news/${slugify(article.title)}`"
-                @click.native="saveArticle(article)"
               >
-                <UiButton color="btn-primary">Leer más →</UiButton>
+                Leer más
               </NuxtLink>
             </UiCard>
           </div>
@@ -58,10 +58,5 @@
       .toLowerCase()
       .replace(/\s+/g, '-')
       .replace(/[^\w-]+/g, '');
-  }
-
-  // Guardar en localStorage
-  function saveArticle(article) {
-    localStorage.setItem('detalleNoticia', JSON.stringify(article));
   }
 </script>

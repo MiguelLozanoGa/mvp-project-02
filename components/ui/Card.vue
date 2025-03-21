@@ -30,3 +30,4 @@
     props.img || 'https://via.placeholder.com/700x350?text=No+Image'
   );
 </script>
+    
