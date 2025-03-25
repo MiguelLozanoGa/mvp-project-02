@@ -9,7 +9,9 @@
 <script setup>
   import { useTodoStore } from '@/stores/todoStore';
   const todoStore = useTodoStore();
-
+  // llamar metodo para obtener la lista de tareas getTodos
+  // Actualizar pendingTodo con updatePendingTodo
+  // todoStore.setPentingTodo(count)
   onMounted(() => {
     todoStore.fetchTodos();
   });
