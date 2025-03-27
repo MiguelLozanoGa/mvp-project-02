@@ -10,7 +10,5 @@
 </template>
 
 <script setup>
-  defineProps({
-    checked: Boolean,
-  });
+  defineProps({ checked: Boolean });
 </script>
