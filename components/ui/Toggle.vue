@@ -4,18 +4,11 @@
       class="form-check-input"
       type="checkbox"
       :checked="checked"
-      @change="toggle"
+      @change="$emit('toggle')"
     />
   </div>
 </template>
 
 <script setup>
-  const props = defineProps({
-    checked: Boolean,
-  });
-  const emit = defineEmits(['toggle']);
-
-  const toggle = () => {
-    emit('toggle');
-  };
+  defineProps({ checked: Boolean });
 </script>

@@ -3,6 +3,7 @@
     <h1 class="mb-4">Detalle de la Noticia</h1>
 
     <div v-if="!article">No se encontró la noticia</div>
+
     <div v-else class="card">
       <img
         :src="article.urlToImage || placeholder"
@@ -20,14 +21,16 @@
           >Ver en el sitio original</a
         >
 
-        <UiButton :color="'btn-success'" @share="share">Compartir</UiButton>
+        <UiButton color="btn-success" event="share" @share="share"
+          >Compartir</UiButton
+        >
 
         <UiButton
           :color="seen ? 'btn-success' : 'btn-warning'"
           event="seen"
           @seen="markAsSeen"
         >
-          {{ seen ? 'Vista' : 'Marcar como visto' }}
+          {{ seen ? 'Vista' : 'Marcar como vista' }}
         </UiButton>
       </div>
     </div>
@@ -48,10 +51,10 @@
   const seen = ref(false);
   const article = ref(null);
 
-  // Slug recibido en la URL
+  // Slug de la URL
   const slug = route.params.slug;
 
-  // Traer las noticias y buscar la que coincida con el slug
+  // Obtener las noticias
   const config = useRuntimeConfig();
   const apiKey = config.public.newsApiKey;
 
@@ -59,13 +62,14 @@
     `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`
   );
 
-  // Buscar la noticia por el slug
+  // Buscar la noticia según el slug
   if (news.value && news.value.articles) {
     article.value = news.value.articles.find(
       (art) => slugify(art.title) === slug
     );
   }
 
+  // Formatear fecha
   const formatDate = (dateStr) => {
     const date = new Date(dateStr);
     return date.toLocaleDateString('en-US', {

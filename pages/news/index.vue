@@ -1,47 +1,45 @@
 <template>
   <div class="container mt-5">
     <h1 class="mb-4">Últimas Noticias</h1>
-    <!-- <pre>{{ news }}</pre> -->
+
     <ClientOnly>
-      <div v-if="error">Error al cargar las noticias</div>
-      <div v-else-if="pending">Cargando noticias...</div>
-      <div v-else>
-        <div class="row">
-          <div
-            class="col-lg-6"
-            v-for="article in news.articles"
-            :key="article.url"
-          >
-            <UiCard
-              :title="article.title"
-              :description="article.description"
-              :img="article.urlToImage"
-              :date="formatDate(article.publishedAt)"
-            >
+      <UiList :items="news.articles">
+        <template #default="{ item: article }">
+          <div class="card mb-3">
+            <img
+              :src="article.urlToImage"
+              class="card-img-top"
+              alt="Imagen de noticia"
+            />
+            <div class="card-body">
+              <h5 class="card-title">{{ article.title }}</h5>
+              <p class="card-text">{{ article.description }}</p>
+              <p class="card-text">
+                <small class="text-muted">{{
+                  formatDate(article.publishedAt)
+                }}</small>
+              </p>
               <NuxtLink
                 class="btn btn-primary"
                 :to="`/news/${slugify(article.title)}`"
+                >Leer más</NuxtLink
               >
-                Leer más
-              </NuxtLink>
-            </UiCard>
+            </div>
           </div>
-        </div>
-      </div>
+        </template>
+      </UiList>
     </ClientOnly>
   </div>
 </template>
 
 <script setup>
+  import { useFetch } from '#app';
+
   const config = useRuntimeConfig();
   const apiKey = config.public.newsApiKey;
 
-  const {
-    data: news,
-    pending,
-    error,
-  } = await useFetch(
-    () => `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`
+  const { data: news } = await useFetch(
+    `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`
   );
 
   function formatDate(dateStr) {

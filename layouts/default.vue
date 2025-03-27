@@ -3,7 +3,8 @@
     <UiPartialsTopNavbar />
     <UiPartialsHeader />
 
-    <NuxtPage />
+    <!-- <NuxtPage /> -->
+    <slot />
 
     <UiPartialsFooter />
   </div>

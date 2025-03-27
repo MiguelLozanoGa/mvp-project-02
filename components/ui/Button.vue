@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <button :class="`btn ${color}`" @click="handler">
-      <slot />
-    </button>
-  </div>
+  <button :class="`btn ${color}`" @click="handler">
+    <slot />
+  </button>
 </template>
 
 <script setup>
@@ -14,14 +12,14 @@
     },
     event: {
       type: String,
-      default: 'share', // Por defecto emite 'share'
+      default: 'click',
     },
   });
 
-  const emit = defineEmits(['share', 'seen']);
+  const emit = defineEmits(['click', 'delete', 'edit', 'share', 'seen']);
 
   const handler = () => {
-    console.log(`Click emitiendo evento: ${props.event}`);
-    emit(props.event); // Emite el evento que te pasan como prop
+    console.log(`[UiButton] Click emitiendo evento: ${props.event}`);
+    emit(props.event);
   };
 </script>
