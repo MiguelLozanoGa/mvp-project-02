@@ -24,7 +24,4 @@
     img: String,
     date: String,
   });
-
-  const fallback = 'https://via.placeholder.com/700x350?text=No+Image';
-  const imageSrc = ref(props.img || fallback);
 </script>
