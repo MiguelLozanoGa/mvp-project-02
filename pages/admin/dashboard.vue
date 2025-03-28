@@ -1,7 +1,7 @@
 <template>
   <ClientOnly>
     <section class="container mt-4">
-      <h1 class="text-success mb-4">🎩 Panel de Administración</h1>
+      <h1 class="text-success mb-4">Panel de Administración</h1>
       <UiTable :items="users" :columns="columns" />
     </section>
   </ClientOnly>
