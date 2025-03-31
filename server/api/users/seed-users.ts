@@ -3,7 +3,6 @@ const prisma = new PrismaClient();
 
 export default defineEventHandler(async () => {
   try {
-    // Intentamos crear o actualizar el usuario admin
     const admin = await prisma.user.upsert({
       where: { email: 'admin@example.com' },
       update: {},
@@ -16,7 +15,6 @@ export default defineEventHandler(async () => {
 
     console.log('Usuario admin creado o actualizado:', admin);
 
-    // Intentamos crear o actualizar el usuario member
     const member = await prisma.user.upsert({
       where: { email: 'member@example.com' },
       update: {},

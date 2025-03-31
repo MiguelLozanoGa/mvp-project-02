@@ -8,6 +8,8 @@
 </template>
 
 <script setup>
+  import admin from '~/middleware/admin';
+
   const users = ref([]);
 
   const columns = [
@@ -19,5 +21,10 @@
   onMounted(async () => {
     const res = await fetch('/api/users');
     users.value = await res.json();
+  });
+
+  definePageMeta({
+    middleware: 'admin',
+    layout: 'admin',
   });
 </script>

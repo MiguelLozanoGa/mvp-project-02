@@ -32,4 +32,9 @@
   function goToTodos() {
     router.push('/todos');
   }
+
+  definePageMeta({
+    middleware: 'member',
+    layout: 'member',
+  });
 </script>

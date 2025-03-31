@@ -1,15 +1,29 @@
-/// server/middleware/member.ts
-import { defineNuxtRouteMiddleware, navigateTo, useRequestEvent } from '#app';
+// middleware/member.ts
+import { defineNuxtRouteMiddleware, navigateTo } from '#app';
+
+// Declara el tipo de cookies explícitamente para TypeScript
+interface Cookies {
+  [key: string]: string;
+}
 
 export default defineNuxtRouteMiddleware((to, from) => {
-  const event = useRequestEvent();
-  const user = event?.context.user;
+  // Accede a las cookies del cliente
+  const cookies: Cookies = document.cookie.split(';').reduce((acc, cookie) => {
+    const [name, value] = cookie.split('=');
+    acc[name.trim()] = value;
+    return acc;
+  }, {} as Cookies);
 
-  console.log('[Middleware:member] Usuario simulado:', user);
+  const userId = cookies['user_id'];
+  const userType = cookies['user_type'];
 
-  if (!user || user.user_type !== 'member') {
-    console.log('[Middleware:member] Acceso denegado');
-    return navigateTo('/');
+  console.log('[Middleware:member] user_id:', userId);
+  console.log('[Middleware:member] user_type:', userType);
+
+  // Verifica si el tipo de usuario es member
+  if (!userId || userType !== 'member') {
+    console.log('[Middleware:member] Acceso denegado: No es member');
+    return navigateTo('/error'); // Redirige a página de error
   }
 
   console.log('[Middleware:member] Acceso concedido');

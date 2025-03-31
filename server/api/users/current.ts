@@ -1,3 +1,4 @@
+//devuelve usuari autenticado
 import { PrismaClient } from '@prisma/client';
 import { getCookie } from 'h3';
 
