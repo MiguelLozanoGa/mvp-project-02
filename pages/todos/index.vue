@@ -73,13 +73,13 @@
 
     <!-- Modal Bootstrap para crear tarea -->
     <div class="text-end mt-4">
-      <UiButton
-        color="btn-success"
+      <button
+        class="btn btn-success"
         data-bs-toggle="modal"
         data-bs-target="#crearTareaModal"
       >
         Crear Nueva Tarea
-      </UiButton>
+      </button>
     </div>
 
     <div class="modal fade" id="crearTareaModal" tabindex="-1">
@@ -108,8 +108,9 @@
             </select>
           </div>
           <div class="modal-footer">
-            <UiButton
+            <<UiButton
               color="btn-success"
+              event="click"
               @click="handleCreate"
               data-bs-dismiss="modal"
             >
@@ -144,6 +145,8 @@
   });
 
   const handleCreate = async () => {
+    console.log('[handleCreate] Datos introducidos:', newTodo.value);
+
     if (
       !newTodo.value.name ||
       !newTodo.value.description ||
@@ -152,9 +155,14 @@
       alert('Por favor, completa todos los campos');
       return;
     }
-    await createTodo(newTodo.value);
-    todos.value = await fetchTodos();
-    newTodo.value = { name: '', description: '', priority: '' };
+
+    try {
+      const result = await createTodo(newTodo.value);
+      console.log('[handleCreate] Tarea creada con éxito:', result);
+      newTodo.value = { name: '', description: '', priority: '' };
+    } catch (err) {
+      console.error('[handleCreate] Error:', err);
+    }
   };
 
   const onDelete = async (id) => {
