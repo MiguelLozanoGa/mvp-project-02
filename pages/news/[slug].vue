@@ -55,12 +55,7 @@
   const slug = route.params.slug;
 
   // Obtener las noticias
-  const config = useRuntimeConfig();
-  const apiKey = config.public.newsApiKey;
-
-  const { data: news } = await useFetch(
-    `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`
-  );
+  const { data: news } = await useFetch('/api/news');
 
   // Buscar la noticia según el slug
   if (news.value && news.value.articles) {
