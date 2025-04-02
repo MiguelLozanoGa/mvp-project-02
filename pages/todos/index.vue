@@ -73,13 +73,15 @@
 
     <!-- Modal Bootstrap para crear tarea -->
     <div class="text-end mt-4">
-      <button
-        class="btn btn-success"
-        data-bs-toggle="modal"
-        data-bs-target="#crearTareaModal"
-      >
-        Crear Nueva Tarea
-      </button>
+      <ClientOnly>
+        <button
+          class="btn btn-success"
+          data-bs-toggle="modal"
+          data-bs-target="#crearTareaModal"
+        >
+          Crear Nueva Tarea
+        </button>
+      </ClientOnly>
     </div>
 
     <div class="modal fade" id="crearTareaModal" tabindex="-1">
@@ -159,6 +161,8 @@
     try {
       const result = await createTodo(newTodo.value);
       console.log('[handleCreate] Tarea creada con éxito:', result);
+      todos.value = await fetchTodos();
+
       newTodo.value = { name: '', description: '', priority: '' };
     } catch (err) {
       console.error('[handleCreate] Error:', err);

@@ -8,20 +8,13 @@
 </template>
 
 <script setup>
-  import admin from '~/middleware/admin';
-
-  const users = ref([]);
-
   const columns = [
     { key: 'email', label: 'Email' },
     { key: 'user_type', label: 'Rol' },
     { key: 'created_at', label: 'Creado' },
   ];
 
-  onMounted(async () => {
-    const res = await fetch('/api/users');
-    users.value = await res.json();
-  });
+  const { data: users } = await useFetch('/api/users/get-all');
 
   definePageMeta({
     middleware: 'admin',

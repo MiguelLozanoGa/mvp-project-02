@@ -35,9 +35,9 @@
       </div>
     </div>
 
-    <NuxtLink to="/news">
-      <UiButton color="btn-secondary" class="mt-3">Volver a noticias</UiButton>
-    </NuxtLink>
+    <UiButton color="btn-secondary" class="mt-3" @click="navigateTo('/news')">
+      Volver a noticias
+    </UiButton>
   </div>
 </template>
 
