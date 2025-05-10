@@ -3,9 +3,10 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 
 model Comment {
   id        Int      @id @default(autoincrement())
@@ -22,5 +23,17 @@ model Todo {
   done        Boolean  @default(false)
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
+}
+
+
+model User {
+  id         String   @id @default(uuid())
+  email      String   @unique
+  password   String
+  user_type  String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("users") // 👈 así la tabla en la BBDD se llama users
 }
 

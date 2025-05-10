@@ -36,7 +36,7 @@ export function useTodos() {
       return todos.value;
     } catch (err) {
       error.value = err;
-      console.error(err);
+      console.error('[useTodos] Error al obtener tareas:', err);
     } finally {
       loading.value = false;
     }
@@ -45,24 +45,43 @@ export function useTodos() {
   const createTodo = async (
     newData: Omit<TodoAttributes, 'done' | 'created_at' | 'updated_at'>
   ) => {
-    await $fetch('/api/todos', {
-      method: 'POST',
-      body: { ...newData, done: false },
-    });
-    await fetchTodos();
+    try {
+      console.log('[useTodos] Enviando nueva tarea:', newData);
+      const response = await $fetch<{ data: Todo }>('/api/todos', {
+        method: 'POST',
+        body: { ...newData, done: false },
+      });
+      console.log('[useTodos] Respuesta del servidor:', response);
+      await fetchTodos();
+      return response.data;
+    } catch (err) {
+      error.value = err;
+      console.error('[useTodos] Error al crear tarea:', err);
+      throw err;
+    }
   };
 
   const updateTodo = async (
     id: string,
     updatedData: Partial<TodoAttributes>
   ) => {
-    await $fetch(`/api/todos/${id}`, { method: 'PUT', body: updatedData });
-    await fetchTodos();
+    try {
+      await $fetch(`/api/todos/${id}`, { method: 'PUT', body: updatedData });
+      await fetchTodos();
+    } catch (err) {
+      console.error('[useTodos] Error al actualizar tarea:', err);
+      throw err;
+    }
   };
 
   const deleteTodo = async (id: string) => {
-    await $fetch(`/api/todos/${id}`, { method: 'DELETE' });
-    await fetchTodos();
+    try {
+      await $fetch(`/api/todos/${id}`, { method: 'DELETE' });
+      await fetchTodos();
+    } catch (err) {
+      console.error('[useTodos] Error al eliminar tarea:', err);
+      throw err;
+    }
   };
 
   return { todos, fetchTodos, createTodo, updateTodo, deleteTodo };
