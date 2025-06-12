@@ -5,6 +5,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event) => {
+  console.log('Entro por aqui');
   // Asegura que esto solo se ejecute en contexto con petición HTTP
   if (!event.node || !event.node.req) {
     console.log('[Middleware:user] No hay petición HTTP, se omite');

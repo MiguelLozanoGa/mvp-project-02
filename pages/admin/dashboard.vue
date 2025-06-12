@@ -2,7 +2,8 @@
   <ClientOnly>
     <section class="container mt-4">
       <h1 class="text-success mb-4">Panel de Administración</h1>
-      <UiTable :items="users" :columns="columns" />
+      <pre>{{ users }}</pre>
+      <div v-if="user"><UiTable :items="users" :columns="columns" /></div>
     </section>
   </ClientOnly>
 </template>

@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@types/node": "22.13.10",
+    "dotenv-cli": "^8.0.0",
     "prisma": "5.22.0"
   }
 }

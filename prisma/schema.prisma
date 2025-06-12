@@ -4,8 +4,9 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DATABASE_URL")                                
 }
+
 
 
 model Comment {
@@ -34,6 +35,6 @@ model User {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  @@map("users") // 👈 así la tabla en la BBDD se llama users
+  @@map("users") // 
 }
 
