@@ -38,9 +38,7 @@
   const config = useRuntimeConfig();
   const apiKey = config.public.newsApiKey;
 
-  const { data: news } = await useFetch(
-    `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`
-  );
+  const { data: news } = await useFetch('/api/news');
 
   function formatDate(dateStr) {
     const date = new Date(dateStr);

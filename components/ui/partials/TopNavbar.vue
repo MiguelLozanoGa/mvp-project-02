@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <NuxtLink class="navbar-brand" to="/">NOTICIAS</NuxtLink>
+      <NuxtLink class="navbar-brand" to="/">MVP-02</NuxtLink>
       <button
         class="navbar-toggler"
         type="button"
@@ -23,10 +23,10 @@
             <NuxtLink class="nav-link" to="/todos">Tareas</NuxtLink>
           </li>
           <li class="nav-item">
-            <NuxtLink class="nav-link" to="#">Sobre Nosotros</NuxtLink>
+            <NuxtLink class="nav-link" to="/admin/dashboard">Admin</NuxtLink>
           </li>
           <li class="nav-item">
-            <NuxtLink class="nav-link" to="#">Contacto</NuxtLink>
+            <NuxtLink class="nav-link" to="/member/dashboard">Member</NuxtLink>
           </li>
         </ul>
       </div>
